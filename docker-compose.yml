@@ -5,7 +5,7 @@ services:
     image: nig-vote
     ports:
       - "5000:80"
-    links:
+    depends_on:
       - redis
     networks:
       - front-tier
@@ -15,7 +15,7 @@ services:
     image: nig-result
     ports:
       - "5001:80"
-    links:
+    depends_on:
       - db
     networks:
       - front-tier
@@ -23,7 +23,7 @@ services:
 
   worker:
     image: worker
-    links:
+    depends_on:
       - db
       - redis
     networks:
@@ -37,6 +37,8 @@ services:
 
   db:
     image: postgres:9.4
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
     networks:
       - back-tier
 
