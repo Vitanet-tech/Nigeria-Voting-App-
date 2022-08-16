@@ -38,7 +38,9 @@ services:
   db:
     image: postgres:9.4
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+        - POSTGRES_DB=app
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=supersecretpassword
     networks:
       - back-tier
 
